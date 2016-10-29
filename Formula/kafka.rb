@@ -1,9 +1,9 @@
 class Kafka < Formula
   desc "Publish-subscribe messaging rethought as a distributed commit log"
   homepage "https://kafka.apache.org"
-  url "http://mirrors.ibiblio.org/apache/kafka/0.10.0.1/kafka_2.11-0.10.0.1.tgz"
-  mirror "https://archive.apache.org/dist/kafka/0.10.0.1/kafka_2.11-0.10.0.1.tgz"
-  sha256 "2d73625aeddd827c9e92eefb3c727a78455725fbca4361c221eaa05ae1fab02d"
+  url "http://mirror.nbtelecom.com.br/apache/kafka/0.10.1.0/kafka_2.11-0.10.1.0.tgz"
+  mirror "https://archive.apache.org/dist/kafka/0.10.1.0/kafka_2.11-0.10.1.0.tgz"
+  sha256 "6d9532ae65c9c8126241e7b928b118aaa3a694dab08069471f0e61f4f0329390"
 
   bottle do
     cellar :any_skip_relocation
@@ -104,7 +104,7 @@ class Kafka < Formula
       sleep 30
 
       system "#{bin}/kafka-topics --zookeeper localhost:2181 --create --if-not-exists --replication-factor 1 --partitions 1 --topic test > #{testpath}/kafka/demo.out 2>/dev/null"
-      system "echo \"test message\" | #{bin}/kafka-console-producer --broker-list localhost:9092 --topic test 2>/dev/null"
+      system "echo", "\"test message\" | #{bin}/kafka-console-producer --broker-list localhost:9092 --topic test 2>/dev/null"
       system "#{bin}/kafka-console-consumer --zookeeper localhost:2181 --topic test --from-beginning --max-messages 1 >> #{testpath}/kafka/demo.out 2>/dev/null"
       system "#{bin}/kafka-topics --zookeeper localhost:2181 --delete --topic test >> #{testpath}/kafka/demo.out 2>/dev/null"
     ensure
